@@ -1,0 +1,295 @@
+funcionarios = []
+cargos = []
+processos = []
+
+#Cadastro e gerenciamento de funcionários
+
+#Cadastro dos funcionários
+#Realiza o cadastro dos funcionários por meio das entradas de nome, idade e cargo. Quando o funcionário é cadastrado aparece uma mensagem de confirmação da operação.
+#Teste1: foi feito um teste um unitário, inserido os dados de maneira adequada, criando um cadastro para um funcionário, e verificando se a saída esperada foi atingida. Outro teste foi inserir caracteres na idade, esperando o erro.
+def cad():
+    nome = input("Nome do funcionário: ")
+    idade = int(input("Idade do funcionário: "))
+    cargo = input("Cargo do funcionário: ")
+    funcionario = {
+        "nome": nome,
+        "idade": idade,
+        "cargo": cargo
+    }
+    funcionarios.append(funcionario)
+    print(f"\nFuncionário cadastrado com sucesso!\n")
+
+#Lista de funcionários
+#Recebe a quant. de funcionários cadastrados e permite visualizar suas informações em formato de lista. Caso não haja funcionários cadastrados ou seja funcionarios = 0 exibe uma mensagem de erro.
+#Teste2: foi feito um teste unitário, primeiro sem a criação de um cadastro, para averiguar se a mensagem "Não há funcionários" aparece. Depois com um e dois cadastros criados para averiguar se a lista aparece corretamente.
+def lista():
+    if len(funcionarios) == 0:
+        print(f"\nNão há funcionários cadastrados.\n")
+    else:
+        for i, funcionario in enumerate(funcionarios, start=1):
+            print(f"\nFuncionário {i}:")
+            print(f"Nome: {funcionario['nome']}")
+            print(f"Idade: {funcionario['idade']}")
+            print(f"Cargo: {funcionario['cargo']}")
+        print("\n")
+
+#Atualização de Dados
+#Para atualizar os dados deve-se digitar como entrada o nome do funcionário, após isso, deverá digitar suas novas informações, caso o funcionário não esteja cadastrado será exibida uma mensagem de erro.
+#Teste3: foi feito um teste unitário, com um cadastro criado e depois atualizando os dados e então avetiguando se eles tinham realmente sido alterados. Depois, foi digitado o nome de um funcionário inexistente, para testar se mensagem de erro estava funcionando.
+def att():
+    nome = input("Nome do funcionário que deseja atualizar: ")
+    for funcionario in funcionarios:
+        if funcionario['nome'] == nome:
+            print(f"\nFuncionário encontrado: {funcionario['nome']}")
+            funcionario['idade'] = int(input("Nova idade: "))
+            funcionario['cargo'] = input("Novo cargo: ")
+            print("\nFuncionário atualizado com sucesso!\n")
+            return
+    print("\nFuncionário não encontrado.\n")
+
+#Exclusão de dados
+#Para excluir, o processo é ser semelhante ao de atualizar, porém, ao escolher o funcionário, será levado a uma tela na qual é preciso confirmar a escolha com "Sim" ou "Não", caso a resposta for diferente ou o funcionário não estiver cadastrado uma mensagem de erro será escrita.
+#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e averiguando se o funcionário realmente foi excluído, e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o nome de um funcionário não cadastrado, testando a outra mensagem de erro.
+def deletar():
+    nome = input("Nome do funcionário que deseja excluir: ")
+    for funcionario in funcionarios:
+        if funcionario["nome"] == nome:
+            confirmar = input(f"Tem certeza que deseja excluir {nome}? (sim/não): ")
+            if confirmar == "sim" or "Sim":
+                funcionarios.remove(funcionario)
+                print("\nFuncionário excluído com sucesso!\n")
+            else:
+                print("\nInválido!\n")
+            return
+    print("\nFuncionário não encontrado.\n")
+
+#Gestão de cargos
+#Permite o gerenciamento dos cargos da empresa, ao verificar o título do cargo, o salário e disponibilidade.
+
+#Cadastrar um cargo
+#O processo deve ser semelhante ao de cadastro e gerenciamento de funcionários, para cadastrar tem de se preencher como entrada o nome do cargo, o salário e a disponibilidade como “Disponível” ou “Indisponível”
+#Teste1: foi feito um teste um unitário, semelhante ao de cadastro de funcionários, inserido os dados de maneira adequada, criando um cadastro para o cargo, e verificando se a saída esperada seria atingida. Outro teste foi inserir caracteres no salário, esperando o erro.
+def cadastrar_cargo():
+    nome = input("Nome do cargo: ")
+    salario = float(input("Salário do cargo: "))
+    disponibilidade = input("Disponibilidade (disponível/indisponível): ")
+    cargo = {
+        "nome": nome,
+        "salario": salario,
+        "disponibilidade": disponibilidade
+    }
+    cargos.append(cargo)
+    print("\nCargo cadastrado com sucesso!\n")
+
+#Lista dos cargos
+#Recebe a quant. de cargos cadastrados e permite visualizar suas informações em formato de lista. Caso não haja cargos cadastrados ou seja cargos = 0 exibe uma mensagem de erro.
+#Teste2: foi feito um teste unitário, primeiro sem a criação de um cadastro, para averiguar se a mensagem "Nenhum cargo registrado" aparece. Depois com um e dois cadastros criados para averiguar se a lista aparece corretamente.
+def listar_cargos():
+    if len(cargos) == 0:
+        print("\nNenhum cargo cadastrado.\n")
+    else:
+        for i, cargo in enumerate(cargos, start=1):
+            print(f"\nCargo {i}:")
+            print(f"Nome: {cargo['nome']}")
+            print(f"Salário: R${cargo['salario']:.2f}")
+            print(f"Disponibilidade: {cargo['disponibilidade']}")
+        print("\n")
+
+#Atualização de dados do cargo
+#Para atualizar alguma informação, é necessário somente digitar o nome do cargo e, em seguida, digitar as novas informações.
+#Teste3: foi feito um teste unitário, com um cadastro criado e depois atualizando os dados e então avetiguando se eles tinham realmente sido alterados. Depois, foi digitado um cargo inexistente, para testar se mensagem de erro estava funcionando.
+def atualizar_cargo():
+    nome = input("Nome do cargo que deseja atualizar: ")
+    for cargo in cargos:
+        if cargo['nome'] == nome:
+            print(f"\nCargo encontrado: {cargo['nome']}")
+            cargo['salario'] = float(input("Novo salário: "))
+            cargo['disponibilidade'] = input("Nova disponibilidade (disponível/indisponível): ")
+            print("\nCargo atualizado com sucesso!\n")
+            return
+    print("\nCargo não encontrado.\n")
+
+#Exclusão de cargo
+#Para excluir alguma informação, é necessário digitar o nome do cargo e, em seguida, confirmar a exclusão, caso seja digitado "Não" o processo é interrompido e uma mensagem é exibida, se for digitado algo diferente de "Sim" e "Não" é exibida uma mensagem de erro.
+#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e "Não" e "não" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um cargo inexistente, testando a outra mensagem de erro.
+def excluir_cargo():
+    nome = input("Nome do cargo que deseja excluir: ")
+    for cargo in cargos:
+        if cargo['nome'] == nome:
+            confirmacao = input("Tem certeza que deseja excluir {nome}? (sim/não): ").lower()
+            if confirmacao == "sim" or "Sim":
+                cargos.remove(cargo)
+                print("\nCargo excluído com sucesso!\n")
+            else: 
+                print("\nInválido\n")
+            return
+    print("\nCargo não encontrado.\n")
+
+#Gestão de processos seletivos
+#O sistema tem de ser capaz de gerir os processos seletivos da empresa, indicando se existem vagas abertas, a descrição das vagas e a quantidade de candidatos.
+
+#Cadastro de processo seletivo 
+#Se optar por cadastrar um novo processo, deve colocar como entrada o nome do processo, a quantidade de vagas disponíveis, a descrição da vaga e a quantidade de candidatos.
+#Teste1: foi feito um teste um unitário, semelhante aos anteriores, inserido os dados de maneira adequada, criando um cadastro para o processo, e verificando se a saída esperada seria atingida. Outro teste foi inserir caracteres no número de vagas e de candidatos, esperando o erro.
+def cadastrar_processo():
+    nome = input("Nome do processo seletivo: ")
+    vagas = int(input("Quantidade de vagas: "))
+    candidatos = int(input("Quantidade de candidatos: "))
+    processo = {
+        "nome": nome,
+        "vagas": vagas,
+        "candidatos": candidatos
+    }
+    processos.append(processo)
+    print("\nProcesso seletivo cadastrado com sucesso!\n")
+
+
+#Lista dos processos
+#Se selecionar listar, irá visualizar uma lista com todos os processos ativos da empresa e suas respectivas informações.
+#Teste2: foi feito um teste unitário, primeiro sem a criação de um cadastro, para averiguar se a mensagem "Nenhum processo seletivo registrado" aparece. Depois com um e dois cadastros criados para averiguar se a lista aparece corretamente.
+def lista_processos():
+    if len(processos) == 0:
+        print("\nNenhum processo seletivo cadastrado.\n")
+    else:
+        for i, processo in enumerate(processos, start=1):
+            print(f"\nProcesso {i}:")
+            print(f"Nome: {processo['nome']}")
+            print(f"Vagas: {processo['vagas']}")
+            print(f"Candidatos: {processo['candidatos']}")
+        print("\n")
+
+#Atualizar processos
+#Para atualizar tem de escrever o nome do processo e, na tela seguinte, digitar as novas informações.
+#Teste3: foi feito um teste unitário, com um cadastro criado e depois atualizando os dados e então avetiguando se eles tinham realmente sido alterados. Depois, foi digitado um processo seletivo inexistente, para testar se mensagem de erro estava funcionando.
+def atualizar_processo():
+    nome = input("Digite o nome do processo seletivo que deseja atualizar: ")
+    for processo in processos:
+        if processo['nome'] == nome:
+            print(f"\nProcesso seletivo encontrado: {processo['nome']}")
+            processo['vagas'] = int(input("Nova quantidade de vagas: "))
+            processo['candidatos'] = int(input("Nova quantidade de candidatos: "))
+            print("\nProcesso seletivo atualizado com sucesso!\n")
+            return
+    print("\nProcesso seletivo não encontrado.\n")
+
+#Excluir processo seletivo
+#Caso queira excluir terá que digitar o nome do processo e confirmar se realmente deseja excluir
+#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e "Não" e "não" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um processo inexistente, testando a outra mensagem de erro.
+def excluir_processo():
+    nome = input("Digite o nome do processo seletivo que deseja excluir: ")
+    for processo in processos:
+        if processo["nome"] == nome:
+            confirmacao = input(f"Tem certeza que deseja excluir {nome}? (sim/não): ").lower()
+            if confirmacao == "sim" or "Sim":
+                processos.remove(processo)
+                print("\nProcesso seletivo excluído com sucesso!\n")
+            else:
+                print("\nInválido\n")
+            return
+    print("\nProcesso seletivo não encontrado.\n")
+
+#Alternar entre os menus de gerenciamento
+#Permite o acesso entre os diferentes menus de gerenciamento
+#Teste1: foi feito um teste unitário, testando todas as 4 possibilidades e averiguando se saídas estavam corretas e digitando uma opção diferente das descritas para testar a mensagem de erro
+def alternar_menus():
+    while True:
+        print("\nMenu de Gerenciamento")
+        print("1. Gerenciar Funcionários")
+        print("2. Gerenciar Cargos")
+        print("3. Gerenciar Processos Seletivos")
+        print("4. Sair")
+        
+        opcao = input("O que deseja fazer?")
+        
+        if opcao == "1":
+            menu_funcionarios()
+        elif opcao == "2":
+            menu_cargos()
+        elif opcao == "3":
+            menu_processos()
+        elif opcao == "4":
+            print("Saindo")
+            break
+        else:
+            print("Inválido")
+
+#Menu dos funcionários
+#Acessa o menu de gerenciamento, onde é possivel optar entre cadastrar, listar, atualizar, excluir ou então retornar ao menu principal, caso tenha selecionado a opção errada
+#Teste2(ps. mesmo teste foi executado para todos os demais menus): teste unitário testando as 5 opções possíveis e averiguando suas saídas. Depois digitando uma opção diferente, para testar a mensagem de erro.
+def menu_funcionarios():
+    while True:
+        print("\nMenu de Funcionários")
+        print("1. Cadastro")
+        print("2. Lista de funcionários")
+        print("3. Atualização de dados do cadastro")
+        print("4. Excluir funcionário")
+        print("5. Voltar")
+        
+        opcao = input("O que deseja fazer: ")
+        
+        if opcao == "1":
+            cad()
+        elif opcao == "2":
+            lista()
+        elif opcao == "3":
+            att()
+        elif opcao == "4":
+            deletar()
+        elif opcao == "5":
+            break
+        else:
+            print("Inválido")
+
+#Menu dos cargos
+#Acessa  o menu de gerenciamento de cargos e seleciona entre cadastrar, listar, atualizar ou excluir um processo.
+def menu_cargos():
+    while True:
+        print("\nMenu de Cargos")
+        print("1. Cadastro de cargo")
+        print("2. Lista de cargos")
+        print("3. Atualizar de dados do cargo")
+        print("4. Excluir cargo")
+        print("5. Voltar ao menu principal")
+        
+        opcao = input("Escolha uma opção: ")
+        
+        if opcao == "1":
+            cadastrar_cargo()
+        elif opcao == "2":
+            listar_cargos()
+        elif opcao == "3":
+            atualizar_cargo()
+        elif opcao == "4":
+            excluir_cargo()
+        elif opcao == "5":
+            break
+        else:
+            print("Inválido")
+
+#Menu dos processos
+#Acessa o menu de gerenciamento de processos seletivos e seleciona entre cadastrar, listar, atualizar ou excluir um processo.
+def menu_processos():
+    while True:
+        print("\nMenu de Processos Seletivos")
+        print("1. Cadastrar processo seletivo")
+        print("2. Lista de processos seletivos")
+        print("3. Atualizar dados de processo seletivo")
+        print("4. Excluir processo seletivo")
+        print("5. Voltar")
+        
+        opcao = input("O que deseja fazer: ")
+        
+        if opcao == "1":
+            cadastrar_processo()
+        elif opcao == "2":
+            lista_processos()
+        elif opcao == "3":
+            atualizar_processo()
+        elif opcao == "4":
+             excluir_processo()
+        elif opcao == "5":
+            break
+        else:
+            print("Inválido")
+if __name__ == "__main__":
+    alternar_menus()
