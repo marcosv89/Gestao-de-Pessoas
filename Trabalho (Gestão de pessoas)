@@ -111,7 +111,7 @@ def atualizar_cargo():
 
 #Exclusão de cargo
 #Para excluir alguma informação, é necessário digitar o nome do cargo e, em seguida, confirmar a exclusão, caso seja digitado "Não" o processo é interrompido e uma mensagem é exibida, se for digitado algo diferente de "Sim" e "Não" é exibida uma mensagem de erro.
-#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e "Não" e "não" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um cargo inexistente, testando a outra mensagem de erro.
+#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um cargo inexistente, testando a outra mensagem de erro.
 def excluir_cargo():
     nome = input("Nome do cargo que deseja excluir: ")
     for cargo in cargos:
@@ -174,7 +174,7 @@ def atualizar_processo():
 
 #Excluir processo seletivo
 #Caso queira excluir terá que digitar o nome do processo e confirmar se realmente deseja excluir
-#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e "Não" e "não" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um processo inexistente, testando a outra mensagem de erro.
+#Teste4: foi feito um teste unitário, primeiro com um cadastro criado, testando as possibilidades de confirmação "Sim" e "sim" e depois utilizando caracteres diferentes destes para testar a mensagem de erro. Após isso, foi digitado o um processo inexistente, testando a outra mensagem de erro.
 def excluir_processo():
     nome = input("Digite o nome do processo seletivo que deseja excluir: ")
     for processo in processos:
